@@ -279,6 +279,209 @@ button {
   color: var(--ink-soft);
 }
 
+.home-wrap {
+  max-width: 1180px;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.03fr) minmax(340px, 0.97fr);
+  gap: 34px;
+  align-items: center;
+  overflow: hidden;
+  margin: 10px 0 26px;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 250, 247, 0.82)),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.home-hero-copy {
+  min-width: 0;
+}
+
+.home-hero > * {
+  min-width: 0;
+}
+
+.home-kicker {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 5px 11px;
+  border: 1px solid #c8d8e7;
+  border-radius: 999px;
+  background: #f3f7fb;
+  color: #4f6f8a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.home-hero h1 {
+  max-width: 700px;
+  font-size: 54px;
+  line-height: 1.08;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.home-lead {
+  max-width: 650px;
+  margin-top: 18px;
+  color: var(--ink-soft);
+  font-size: 18px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.pain-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.pain-row span {
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-preview {
+  overflow: hidden;
+  border: 1px solid #d6d8ce;
+  border-radius: 8px;
+  background: #f9fbfa;
+  box-shadow: var(--shadow-lg);
+}
+
+.preview-toolbar {
+  display: flex;
+  gap: 7px;
+  padding: 11px 13px;
+  border-bottom: 1px solid #dde4dd;
+  background: #eef4f0;
+}
+
+.preview-toolbar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.preview-toolbar span:nth-child(2) {
+  background: var(--gold);
+}
+
+.preview-toolbar span:nth-child(3) {
+  background: var(--accent);
+}
+
+.home-preview img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--surface);
+}
+
+.preview-note {
+  display: grid;
+  gap: 3px;
+  padding: 15px 16px 17px;
+  border-top: 1px solid #dde4dd;
+  background: var(--surface);
+}
+
+.preview-note strong {
+  font-size: 15px;
+}
+
+.preview-note span {
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.home-section {
+  margin: 32px 0 22px;
+}
+
+.section-title p {
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.section-title h2 {
+  font-size: 22px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.value-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.value-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 800;
+}
+
+.value-card:nth-child(2) .value-mark {
+  background: var(--brand);
+}
+
+.value-card:nth-child(3) .value-mark {
+  background: var(--accent);
+}
+
+.value-card h3 {
+  font-size: 17px;
+}
+
+.value-card p {
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
 .compact-head {
   display: flex;
   align-items: flex-start;
@@ -521,6 +724,20 @@ button {
 
 .btn.danger:hover {
   background: #f3d9d4;
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero h1 {
+    font-size: 44px;
+  }
+
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .btn.sm {
@@ -2384,6 +2601,39 @@ textarea:focus {
 
   .page-head h1 {
     font-size: 23px;
+  }
+
+  .home-wrap {
+    padding: 20px 16px 64px;
+  }
+
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 4px;
+    padding: 22px 18px;
+  }
+
+  .home-hero h1 {
+    font-size: 30px;
+    word-break: break-all;
+  }
+
+  .home-lead {
+    font-size: 16px;
+    word-break: break-all;
+  }
+
+  .home-actions .btn {
+    width: 100%;
+  }
+
+  .home-preview img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .value-grid {
+    grid-template-columns: 1fr;
   }
 
   .prompt-card .qword {

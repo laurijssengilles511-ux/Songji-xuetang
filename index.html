@@ -9,11 +9,34 @@
   <body>
     <header class="topbar" id="topbar"></header>
 
-    <main class="wrap">
-      <div class="page-head">
-        <h1>诵记学堂</h1>
-        <p class="sub">把需要「背」的学科集中到一处 —— 外语学习、经典诵记，一站式记忆训练。</p>
-      </div>
+    <main class="wrap home-wrap">
+      <section class="home-hero" aria-label="诵记学堂产品介绍">
+        <div class="home-hero-copy">
+          <span class="home-kicker">为背诵、默写和长期记忆而做</span>
+          <h1>把零散资料变成每天知道该背什么的学习队列</h1>
+          <p class="home-lead">诵记学堂帮你把外语词书、经典原文、思政题库和自建资料集中管理，用默写、卡片和间隔复习解决“背了很多、忘得更快、复习没章法”的问题。</p>
+          <div class="home-actions" aria-label="首页快捷入口">
+            <a class="btn primary" href="dictation.html">开始复习</a>
+            <a class="btn ghost" href="create.html">创建自己的牌组</a>
+          </div>
+          <div class="pain-row" aria-label="用户痛点">
+            <span>资料分散</span>
+            <span>复习靠感觉</span>
+            <span>错题难沉淀</span>
+          </div>
+        </div>
+
+        <div class="home-preview" aria-label="产品界面预览">
+          <div class="preview-toolbar">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="russian-desktop.png" alt="诵记学堂牌组练习界面预览" />
+          <div class="preview-note">
+            <strong>从“今天要背什么”开始</strong>
+            <span>待复习、错题、收藏和自建牌组都能回到同一个学习节奏里。</span>
+          </div>
+        </div>
+      </section>
 
       <section class="stats" aria-label="学习统计">
         <div class="stat srs-stat-entry">
@@ -32,6 +55,33 @@
         <div class="stat stat-retention">
           <div class="n">—</div>
           <div class="l">掌握率</div>
+        </div>
+      </section>
+
+      <section class="home-section" aria-label="核心价值">
+        <div class="section-title">
+          <div>
+            <h2>不是再做一个资料库，而是帮你持续记住</h2>
+            <p>从输入、练习到复习，每一步都围绕“能不能真正记住”设计。</p>
+          </div>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card">
+            <span class="value-mark">1</span>
+            <h3>把资料收进同一个学习场</h3>
+            <p>官方外语、论语、思政内容和个人牌组放在一起，不用在文档、截图和表格之间来回找。</p>
+          </article>
+          <article class="value-card">
+            <span class="value-mark">2</span>
+            <h3>用默写检验真实掌握</h3>
+            <p>看提示写答案，比单纯看一遍更容易暴露薄弱点，适合单词、句子、概念和背诵材料。</p>
+          </article>
+          <article class="value-card">
+            <span class="value-mark">3</span>
+            <h3>让系统安排下一次复习</h3>
+            <p>按遗忘规律把新卡、错题和待复习内容排进队列，减少“我是不是该复习了”的犹豫。</p>
+          </article>
         </div>
       </section>
 
@@ -55,6 +105,17 @@
           <div class="foot">
             <span class="chip tone">本地资料空间开放</span>
             <span class="go">创建 →</span>
+          </div>
+        </a>
+
+        <a class="card mod-card" href="stats.html" style="--tone:#4f6f8a;--tone-soft:#e5eef7">
+          <div class="icon">析</div>
+          <h3>查看学习进度</h3>
+          <p>用复习记录、掌握率和未来待复习预测看清自己的学习节奏，知道下一步该补哪里。</p>
+          <div class="pbar"><i style="width:0%"></i></div>
+          <div class="foot">
+            <span class="chip tone">进度 · 掌握率 · 预测</span>
+            <span class="go">查看 →</span>
           </div>
         </a>
       </section>
