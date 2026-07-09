@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>思政背诵与刷题 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap wrap-narrow">
+      <div class="crumb"><a href="index.html">首页</a> / 思政</div>
+
+      <div class="page-head">
+        <h1>思政背诵 · 刷题</h1>
+        <p class="sub">核心表述挖空背诵，配合选择题与判断题巩固，导入题库后即可按章节训练。</p>
+      </div>
+
+      <section class="grid grid-2">
+        <a class="card mod-card" href="#" style="--tone:#c79a3a;--tone-soft:#f6edd6">
+          <div class="icon">背</div>
+          <h3>核心表述背诵</h3>
+          <p>导入知识点后，可逐段挖空、遮挡关键词并记录熟练度。</p>
+          <div class="pbar"><i style="width:0%"></i></div>
+          <div class="foot"><span class="chip tone">0 段</span><span class="go">待导入</span></div>
+        </a>
+
+        <a class="card mod-card" href="#" style="--tone:#3d6b5e;--tone-soft:#e0ebe6">
+          <div class="icon">测</div>
+          <h3>选择 / 判断刷题</h3>
+          <p>题库导入后显示题目、选项、答案解析和错题回顾。</p>
+          <div class="pbar"><i style="width:0%"></i></div>
+          <div class="foot"><span class="chip tone">0 题</span><span class="go">待导入</span></div>
+        </a>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="card placeholder-card">
+        <h3>题目预览</h3>
+        <button class="quiz-opt" type="button"><span class="k">A</span>导入题库后显示选项</button>
+        <button class="quiz-opt" type="button"><span class="k">B</span>导入题库后显示选项</button>
+        <button class="quiz-opt" type="button"><span class="k">C</span>导入题库后显示选项</button>
+      </section>
+    </main>
+
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

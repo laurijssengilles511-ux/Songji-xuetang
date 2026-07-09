@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>论语翻译记忆 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap wrap-narrow" id="lunyuPage">
+      <div class="crumb"><a href="index.html">首页</a> / 论语</div>
+
+      <div class="page-head lunyu-page-head">
+        <h1>《论语》翻译记忆</h1>
+        <p class="sub">逐句翻卡记忆原文与白话文翻译，翻面后选择困难、良好或简单。</p>
+      </div>
+
+      <section class="card placeholder-card lunyu-controls">
+        <div class="field" style="margin-bottom:0">
+          <label for="lunyuChapterSelect">选择章节</label>
+          <select id="lunyuChapterSelect"></select>
+        </div>
+      </section>
+
+      <section class="lunyu-session" aria-label="论语翻译记忆">
+        <div class="row between lunyu-session-head">
+          <span class="chip tone" id="lunyuChapterLabel" style="--tone:#3d6b5e;--tone-soft:#e0ebe6"></span>
+          <span class="hint-text" id="lunyuCounter"></span>
+        </div>
+        <div class="pbar" style="--tone:#3d6b5e;margin-bottom:20px"><i id="lunyuProgress" style="width:0%"></i></div>
+
+        <article class="card prompt-card verse lunyu-card" id="lunyuCard">
+          <div class="prompt-actions">
+            <button class="icon-button" id="lunyuFavoriteBtn" type="button" aria-label="收藏当前句子" title="收藏当前句子">☆</button>
+          </div>
+          <div class="qlabel" id="lunyuSentenceId"></div>
+          <div class="qword orig" id="lunyuOriginal"></div>
+
+          <div class="lunyu-reveal-area" id="lunyuRevealArea" hidden>
+            <div class="reveal">
+              <div class="qlabel">白话文翻译</div>
+              <p class="lunyu-translation" id="lunyuTranslation"></p>
+            </div>
+          </div>
+
+          <div class="lunyu-card-foot" id="lunyuCardFoot">
+            <span class="hint-text" id="lunyuCardState">点击下方按钮或按空格键查看翻译</span>
+          </div>
+        </article>
+
+        <div class="anki-ratings" id="lunyuGradePanel" hidden>
+          <button class="anki-rate-btn again" data-grade="again" type="button">
+            <span class="rate-label">再看</span>
+            <span class="rate-hint">重复本句 · 1</span>
+          </button>
+          <button class="anki-rate-btn hard" data-grade="hard" type="button">
+            <span class="rate-label">困难</span>
+            <span class="rate-hint">想了很久 · 2</span>
+          </button>
+          <button class="anki-rate-btn good" data-grade="good" type="button">
+            <span class="rate-label">良好</span>
+            <span class="rate-hint">记起来了 · 3</span>
+          </button>
+          <button class="anki-rate-btn easy" data-grade="easy" type="button">
+            <span class="rate-label">简单</span>
+            <span class="rate-hint">秒记 · 4</span>
+          </button>
+        </div>
+
+        <div class="row lunyu-nav">
+          <button class="btn ghost" id="lunyuPrevBtn" type="button">上一句</button>
+          <button class="btn primary" id="lunyuRevealBtn" type="button">显示翻译</button>
+          <button class="btn ghost" id="lunyuNextBtn" type="button">下一句</button>
+          <div class="spacer"></div>
+          <span class="chip" id="lunyuFavoriteCount">0 收藏</span>
+          <button class="btn ghost" id="lunyuFavoritesOnlyBtn" type="button">只看收藏</button>
+          <button class="btn ghost" id="lunyuAllBtn" type="button" hidden>返回全章</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="data/lunyu-translations.js"></script>
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的主页 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap" id="profilePage">
+      <div class="crumb"><a href="index.html">首页</a> / 我的</div>
+
+      <section id="profileGate">
+        <div class="card placeholder-card access-card">
+          <h3>进入本地资料空间后查看主页</h3>
+          <p>个人主页会集中展示当前浏览器里的自建知识库和收藏知识库。</p>
+          <div class="row">
+            <button class="btn primary" id="profileLoginBtn" type="button">进入资料空间</button>
+            <button class="btn ghost" id="profileRegisterBtn" type="button">创建资料空间</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="profileWorkspace" hidden>
+        <div class="profile-hero card">
+          <img class="avatar xl" id="profileAvatar" alt="用户头像" />
+          <div>
+            <p class="hint-text">我的主页</p>
+            <h1 id="profileName">用户</h1>
+            <p class="sub" id="profileIntro">管理你的知识库和收藏。</p>
+          </div>
+        </div>
+
+        <div class="stats compact-stats" id="profileStats"></div>
+
+        <section class="profile-ai-settings card placeholder-card">
+          <div class="section-title">
+            <h2>智慧创建 API</h2>
+            <span id="aiConfigState">未配置</span>
+          </div>
+          <p class="sub">API Key 只保存在当前浏览器，用于智慧创建时通过后端代理调用模型。</p>
+          <form id="aiConfigForm">
+            <div class="field">
+              <label>服务商</label>
+              <select id="aiProvider">
+                <option value="openai">ChatGPT / OpenAI</option>
+                <option value="deepseek">DeepSeek</option>
+                <option value="anthropic">Claude / Anthropic</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>API Key</label>
+              <input class="input" id="aiApiKey" type="password" autocomplete="off" placeholder="sk-..." />
+            </div>
+            <div class="field">
+              <label>模型</label>
+              <input class="input" id="aiModel" placeholder="gpt-4.1-mini" />
+            </div>
+            <div class="row">
+              <button class="btn primary" type="submit">保存配置</button>
+              <button class="btn ghost" id="aiServiceCheckBtn" type="button">检查后端代理</button>
+              <button class="btn ghost" id="aiConfigClearBtn" type="button">清除配置</button>
+            </div>
+          </form>
+          <div id="aiConfigFeedback"></div>
+        </section>
+
+        <section>
+          <div class="page-head mini-head">
+            <h2>我创建的知识库</h2>
+            <p class="sub">可以查看、编辑或删除自己创建的牌组。</p>
+          </div>
+          <div class="word-list" id="profileBookList"></div>
+        </section>
+
+        <section class="profile-favorites">
+          <div class="page-head mini-head compact-head">
+            <div>
+              <h2>我收藏的知识库</h2>
+              <p class="sub">在项目广场点星标收藏的知识库会汇总在这里。</p>
+            </div>
+            <a class="btn ghost" href="dictation.html">去项目广场</a>
+          </div>
+          <div class="grid grid-2" id="profileFavoriteList"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="data/college-english-iv.js"></script>
+    <script src="data/russian-wordbook.js"></script>
+    <script src="data/lunyu-translations.js"></script>
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

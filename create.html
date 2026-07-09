@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创建牌组 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap" id="customProjectPage">
+      <div class="crumb"><a href="index.html">首页</a> / 创建</div>
+
+      <div class="page-head">
+        <h1>创建牌组与卡片</h1>
+        <p class="sub">先建立牌组，再添加正反面、Cloze 或图片卡片；资料保存在当前浏览器，公开牌组只在本地项目广场可见。</p>
+      </div>
+
+      <section id="customGate">
+        <div class="card placeholder-card access-card">
+          <h3>创建本地资料空间后开放</h3>
+          <p>你的自建牌组会保存在当前浏览器中，之后可进入今日复习或卡片浏览器管理；换设备前请导出备份。</p>
+          <div class="row">
+            <button class="btn primary" id="customLoginBtn" type="button">进入资料空间</button>
+            <button class="btn ghost" id="customRegisterBtn" type="button">创建资料空间</button>
+            <a class="btn ghost" href="dictation.html">使用官方项目</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="customWorkspace" hidden>
+        <div class="stats compact-stats" id="customStats"></div>
+
+        <div class="create-project-layout anki-create-layout">
+          <form class="card placeholder-card create-form" id="customCreateForm">
+            <div class="section-title">
+              <h3 id="customCreateFormTitle">新建牌组</h3>
+              <button class="link-button" id="cancelEditBtn" type="button" hidden>取消编辑</button>
+            </div>
+            <div class="field">
+              <label>牌组名称</label>
+              <input class="input" id="customBookName" placeholder="例如：马克思主义基本原理高频概念" required />
+            </div>
+            <div class="field">
+              <label>可见范围</label>
+              <div class="tag-row visibility-options" id="visibilityOptions">
+                <label class="tag-pick active">
+                  <input type="radio" name="visibility" value="private" checked />
+                  私密
+                </label>
+                <label class="tag-pick">
+                  <input type="radio" name="visibility" value="public" />
+                  公开
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label>牌组标签</label>
+              <div class="tag-row visibility-options" id="projectTagOptions"></div>
+            </div>
+
+            <div class="create-tabs">
+              <input type="radio" id="createTabSmart" name="create-mode" hidden />
+              <input type="radio" id="createTabManual" name="create-mode" checked hidden />
+
+              <div class="create-tab-header" role="tablist">
+                <label class="create-tab-label" for="createTabSmart">
+                  <span class="tab-icon" aria-hidden="true">✨</span>
+                  <span class="tab-title">智慧创建</span>
+                  <span class="tab-badge">AI</span>
+                </label>
+                <label class="create-tab-label" for="createTabManual">
+                  <span class="tab-icon" aria-hidden="true">✏️</span>
+                  <span class="tab-title">手动添加</span>
+                </label>
+              </div>
+
+              <div class="create-tab-panels">
+                <div class="create-tab-panel" id="panelSmart">
+                  <div class="smart-create-card">
+                    <div class="smart-create-head">
+                      <div class="smart-create-title">
+                        <h4>AI 解析学习资料</h4>
+                        <p class="smart-create-sub">自动从 Markdown 中提取问答对</p>
+                      </div>
+                      <span class="chip tone">Markdown → 问答卡</span>
+                    </div>
+                    <p class="hint-text">上传课程笔记、教材摘录或知识点 Markdown，大模型会自动提取核心概念、定义、对比和易错点，一键生成可练习牌组。</p>
+                    <div class="smart-options-grid">
+                      <div class="field">
+                        <label>生成侧重点</label>
+                        <select class="input" id="smartCreateFocus">
+                          <option value="balanced">均衡覆盖</option>
+                          <option value="exam">考试复习</option>
+                          <option value="concept">概念理解</option>
+                          <option value="cloze">主动回忆</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <label>目标数量</label>
+                        <input class="input" id="smartTargetCount" type="number" min="3" max="40" step="1" value="16" />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label>补充要求</label>
+                      <textarea id="smartUserGuidance" rows="3" maxlength="500" placeholder="例如：更偏易错点；优先提取老师强调的定义；不要生成过长答案"></textarea>
+                    </div>
+                    <div class="field">
+                      <label>上传学习资料</label>
+                      <div class="smart-upload-row">
+                        <button class="btn ghost" id="smartMarkdownPickBtn" type="button">选择 Markdown</button>
+                        <span id="smartMarkdownFileName">尚未选择文件</span>
+                      </div>
+                      <input id="smartMarkdownInput" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden />
+                    </div>
+                    <button class="btn primary full-btn" id="smartCreateBtn" type="button">生成并保存牌组</button>
+                    <div id="smartCreateStatus" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="create-tab-panel" id="panelManual">
+                  <div class="section-title">
+                    <h4>添加卡片</h4>
+                    <span id="draftCardCount">0 张待保存</span>
+                  </div>
+                  <div class="field">
+                    <label>正面提示</label>
+                    <textarea id="cardFront" rows="3" placeholder="例如：主动性；倡议"></textarea>
+                  </div>
+                  <div class="row">
+                    <button class="btn ghost" id="insertClozeBtn" type="button">插入 Cloze</button>
+                    <button class="btn ghost" id="frontImageBtn" type="button">正面图片</button>
+                    <button class="btn ghost" id="backImageBtn" type="button">背面图片</button>
+                    <button class="btn ghost" id="extraImageBtn" type="button">补充图片</button>
+                  </div>
+                  <input id="frontImageInput" type="file" accept="image/*" hidden />
+                  <input id="backImageInput" type="file" accept="image/*" hidden />
+                  <input id="extraImageInput" type="file" accept="image/*" hidden />
+                  <div class="field">
+                    <label>背面答案</label>
+                    <input class="input" id="cardBack" placeholder="例如：initiative" />
+                  </div>
+                  <div class="field">
+                    <label>补充信息 / 词性</label>
+                    <input class="input" id="cardExtra" placeholder="例如：n. / 主动采取行动的能力" />
+                  </div>
+                  <div id="customCreateFeedback"></div>
+                  <div class="create-form-actions">
+                    <button class="btn btn-secondary" id="addDraftCardBtn" type="button">添加到待保存卡片</button>
+                    <button class="btn primary" id="customSubmitBtn" type="submit">保存牌组并上架</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <section class="anki-side-panel">
+            <div class="card placeholder-card anki-preview-card">
+              <div class="section-title">
+                <h3>卡片预览</h3>
+                <span>正面 / 背面</span>
+              </div>
+              <div class="anki-preview-grid">
+                <article class="anki-face">
+                  <span>正面</span>
+                  <strong id="previewFront">正面提示会显示在这里</strong>
+                </article>
+                <article class="anki-face back">
+                  <span>背面</span>
+                  <strong id="previewBack">背面答案</strong>
+                  <p id="previewExtra">补充信息会显示在这里</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="draft-panel">
+              <div class="draft-panel-head">
+                <div class="draft-panel-title">
+                  <h2>待保存卡片</h2>
+                  <span class="draft-badge" id="draftBadge">0</span>
+                </div>
+                <div class="draft-panel-actions">
+                  <button class="link-button" id="draftCollapseBtn" type="button" hidden>收起</button>
+                  <button class="link-button danger" id="draftClearBtn" type="button" disabled>清空</button>
+                </div>
+              </div>
+              <p class="sub draft-panel-sub">确认正反面无误后保存为一个可练习牌组。列表可滚动，大量卡片也不会撑开页面。</p>
+              <div class="word-list draft-card-list" id="draftCardList"></div>
+            </div>
+
+            <div class="page-head mini-head">
+              <h2>已上架牌组</h2>
+              <p class="sub">公开牌组会出现在所有人的项目广场中，私密牌组只对你可见。</p>
+            </div>
+            <div class="word-list" id="customBookList"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

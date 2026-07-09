@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>卡片浏览器 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap" id="cardBrowserPage">
+      <div class="crumb"><a href="index.html">首页</a> / 卡片</div>
+
+      <div class="page-head compact-head">
+        <div>
+          <h1>卡片浏览器</h1>
+          <p class="sub">搜索、筛选和管理全部 SRS 卡片；导出 JSON 可备份当前浏览器里的资料。</p>
+        </div>
+        <a class="btn primary" href="dictation.html?startSrs=1">开始复习</a>
+      </div>
+
+      <section class="browser-filters panel">
+        <div class="field">
+          <label>搜索</label>
+          <input class="input" id="browserSearch" placeholder="正面、背面、标签" />
+        </div>
+        <div class="field">
+          <label>牌组</label>
+          <select class="input" id="browserDeck"></select>
+        </div>
+        <div class="field">
+          <label>状态</label>
+          <select class="input" id="browserState">
+            <option value="all">全部</option>
+            <option value="new">新卡</option>
+            <option value="learning">学习中</option>
+            <option value="review">复习</option>
+            <option value="relearning">重学</option>
+            <option value="suspended">暂停</option>
+            <option value="buried">搁置</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>标记</label>
+          <select class="input" id="browserFlag">
+            <option value="all">全部</option>
+            <option value="0">无</option>
+            <option value="1">红</option>
+            <option value="2">橙</option>
+            <option value="3">绿</option>
+            <option value="4">蓝</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>标签</label>
+          <input class="input" id="browserTag" placeholder="例如：重点" />
+        </div>
+        <div class="field">
+          <label>复习</label>
+          <button class="btn primary" id="browserReviewTagBtn" type="button">复习标签</button>
+        </div>
+        <div class="field">
+          <label>筛选牌组</label>
+          <button class="btn ghost" id="browserReviewFilteredBtn" type="button">复习筛选</button>
+        </div>
+        <div class="field">
+          <label>本地备份</label>
+          <button class="btn ghost" id="browserExportBtn" type="button">导出 JSON</button>
+        </div>
+        <div class="field">
+          <label>恢复备份</label>
+          <button class="btn ghost" id="browserImportBtn" type="button">导入 JSON</button>
+          <input id="browserImportInput" type="file" accept="application/json,.json" hidden />
+        </div>
+      </section>
+
+      <div class="stats compact-stats" id="browserStats"></div>
+      <section class="card-browser-list" id="browserList"></section>
+    </main>
+
+    <script src="data/college-english-iv.js"></script>
+    <script src="data/russian-wordbook.js"></script>
+    <script src="data/lunyu-translations.js"></script>
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

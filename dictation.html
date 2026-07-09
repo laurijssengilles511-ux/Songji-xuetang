@@ -1,0 +1,372 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>牌组 · 诵记学堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap wrap-narrow">
+      <div class="crumb"><a href="index.html">首页</a> / 牌组</div>
+
+      <section id="languageSetup">
+        <div class="page-head">
+          <h1>选择牌组</h1>
+          <p class="sub">进入本地资料空间后选择一个牌组开始学习或复习。官方牌组对访客开放，公开牌组展示给本地用户，私密牌组只对创建者可见。</p>
+        </div>
+
+        <div class="stats compact-stats" id="projectStats"></div>
+
+        <div class="field">
+          <label>牌组标签</label>
+          <div class="tag-row project-tag-row" id="projectTagFilters"></div>
+        </div>
+
+        <div class="field">
+          <label>选择牌组</label>
+          <div class="grid grid-2" id="languageList"></div>
+        </div>
+      </section>
+
+      <section id="unitSetup" hidden>
+        <div class="crumb"><button class="link-button" id="backToLanguagesBtn" type="button">牌组</button> / <span id="languageCrumb">大学英语</span></div>
+
+        <div class="page-head">
+          <h1 id="languageTitle">大学英语 IV</h1>
+          <p class="sub" id="languageIntro">选择具体单元后进入 SRS 复习；系统会自动安排新卡和到期卡。</p>
+        </div>
+
+        <div class="stats compact-stats" id="bookStats"></div>
+
+        <div class="library-tools" id="libraryTools">
+          <button class="tool-button" id="openFavoritesBtn" type="button">
+            <span class="tool-icon">☆</span>
+            <span><b>收藏单词</b><small id="favoriteCount">0 个</small></span>
+          </button>
+          <button class="tool-button" id="openWrongsBtn" type="button">
+            <span class="tool-icon">!</span>
+            <span><b>错题集</b><small id="wrongCount">0 个</small></span>
+          </button>
+        </div>
+
+        <div class="field">
+          <label>选择单元</label>
+          <div class="grid grid-2 unit-grid" id="unitList"></div>
+        </div>
+
+        <div class="card placeholder-card" id="trainerOptions" hidden>
+          <div class="field">
+            <label>专项练习方向</label>
+            <div class="tag-row" id="directionTags">
+              <button class="tag-pick active" data-direction="dictation" type="button">看中文 → 写英文</button>
+              <button class="tag-pick" data-direction="anki" type="button">看英文 → 记中文</button>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>顺序</label>
+            <div class="tag-row" id="orderTags">
+              <button class="tag-pick active" data-order="shuffle" type="button">乱序</button>
+              <button class="tag-pick" data-order="seq" type="button">顺序</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="hint-text" id="setupHint" style="margin-top:14px">点击一个单元即可开始 SRS 复习。</p>
+      </section>
+
+      <section id="wordViewer" hidden>
+        <div class="crumb"><button class="link-button" id="backToUnitsFromViewerBtn" type="button">俄语 I</button> / <span id="viewerCrumb">Урок</span></div>
+
+        <div class="page-head compact-head">
+          <div>
+            <h1 id="viewerTitle">俄语单词</h1>
+            <p class="sub" id="viewerIntro"></p>
+          </div>
+        </div>
+
+        <div class="word-table-card">
+          <table class="word-table">
+            <thead>
+              <tr>
+                <th>俄语</th>
+                <th>中文含义</th>
+              </tr>
+            </thead>
+            <tbody id="viewerWordList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="ankiTrainer" class="trainer" hidden>
+        <div class="row between" style="margin-bottom:16px">
+          <span class="chip tone" id="ankiUnitName"></span>
+          <span class="hint-text" id="ankiCounter"></span>
+        </div>
+        <div class="pbar" style="margin-bottom:24px"><i id="ankiPbar" style="width:0%"></i></div>
+
+        <div class="anki-card-stage" id="ankiCardStage">
+          <div class="anki-card" id="ankiCard">
+            <div class="anki-face anki-front">
+              <div class="prompt-actions">
+                <button class="icon-button" id="ankiFavoriteBtn" type="button" aria-label="收藏当前单词" title="收藏当前单词">☆</button>
+              </div>
+              <div class="qlabel" id="ankiFrontLabel">俄语单词</div>
+              <div class="qword" id="ankiFrontText"></div>
+              <div class="qhint" id="ankiFrontHint">在脑中回忆答案后点击查看</div>
+            </div>
+            <div class="anki-face anki-back">
+              <div class="qlabel" id="ankiBackLabel">中文释义</div>
+              <div class="qword" id="ankiBackText"></div>
+              <div class="qextra" id="ankiBackExtra" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="anki-nav-row">
+          <button class="btn ghost anki-nav" id="ankiPrevBtn" type="button" aria-label="上一张" title="上一张">← 上一张</button>
+          <div class="anki-nav-hint" id="ankiNavHint"></div>
+          <button class="btn ghost anki-nav" id="ankiNextBtn" type="button" aria-label="下一张" title="下一张">下一张 →</button>
+        </div>
+
+        <div class="anki-action-bar" id="ankiPreFlip">
+          <button class="btn primary" id="ankiFlipBtn" type="button">显示答案</button>
+          <button type="button" class="btn ghost" id="ankiSkipBtn">跳过</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn ghost" id="ankiQuitBtn">结束</button>
+        </div>
+
+        <div class="anki-ratings" id="ankiRatings" hidden>
+          <button class="anki-rate-btn again" data-rate="again" type="button">
+            <span class="rate-label">再看</span>
+            <span class="rate-hint">重复本卡</span>
+          </button>
+          <button class="anki-rate-btn hard" data-rate="hard" type="button">
+            <span class="rate-label">困难</span>
+            <span class="rate-hint">想了很久</span>
+          </button>
+          <button class="anki-rate-btn good" data-rate="good" type="button">
+            <span class="rate-label">良好</span>
+            <span class="rate-hint">记起来了</span>
+          </button>
+          <button class="anki-rate-btn easy" data-rate="easy" type="button">
+            <span class="rate-label">简单</span>
+            <span class="rate-hint">秒记</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="ankiResult" hidden>
+        <div class="prompt-card">
+          <div class="qlabel">本轮完成</div>
+          <div class="qword" id="ankiScoreBig"></div>
+          <div class="qhint" id="ankiScoreText"></div>
+          <div class="anki-rating-summary" id="ankiRatingSummary"></div>
+        </div>
+        <div class="row" style="justify-content:center">
+          <button class="btn primary" id="ankiAgainBtn" type="button">再练一轮</button>
+          <button class="btn ghost" id="ankiReviewBtn" hidden type="button">只练需复习</button>
+          <button class="btn ghost" id="ankiChangeUnitBtn" type="button">换课程</button>
+          <button class="btn ghost" id="ankiChangeLanguageBtn" type="button">换牌组</button>
+        </div>
+      </section>
+
+      <!-- SRS 间隔复习训练器 -->
+      <section id="srsReview" class="trainer" hidden>
+        <div class="crumb"><button class="link-button" id="srsBackBtn" type="button">牌组</button> / 今日复习</div>
+
+        <div class="row between" style="margin-bottom:16px">
+          <span class="chip tone" id="srsDeckName" style="--tone:#5a7a9f;--tone-soft:#e3ecf5">今日复习</span>
+          <span class="hint-text" id="srsCounter"></span>
+        </div>
+        <div class="pbar" style="--tone:#5a7a9f;margin-bottom:24px"><i id="srsPbar" style="width:0%"></i></div>
+
+        <div class="anki-card-stage" id="srsCardStage">
+          <div class="anki-card" id="srsCard">
+            <div class="anki-face anki-front srs-front-face">
+              <div class="prompt-actions srs-prompt-actions" hidden>
+                <button class="srs-action-button srs-favorite-action" id="srsFavoriteBtn" type="button" aria-label="收藏当前卡片" title="收藏当前卡片">
+                  <span class="srs-action-icon">☆</span><span>收藏</span>
+                </button>
+                <div class="srs-manage-actions" aria-label="卡片管理">
+                  <button class="srs-action-button" id="srsBuryBtn" type="button" aria-label="搁置到明天" title="搁置到明天">
+                    <span class="srs-action-icon">↷</span><span>明天再看</span>
+                  </button>
+                  <button class="srs-action-button" id="srsSuspendBtn" type="button" aria-label="暂停卡片" title="暂停卡片">
+                    <span class="srs-action-icon">Ⅱ</span><span>暂停</span>
+                  </button>
+                  <button class="srs-action-button flag-red" id="srsFlagRedBtn" type="button" aria-label="标记为红色" title="标记为红色">
+                    <span class="flag-dot"></span><span>红</span>
+                  </button>
+                  <button class="srs-action-button flag-orange" id="srsFlagOrangeBtn" type="button" aria-label="标记为橙色" title="标记为橙色">
+                    <span class="flag-dot"></span><span>橙</span>
+                  </button>
+                  <button class="srs-action-button flag-green" id="srsFlagGreenBtn" type="button" aria-label="标记为绿色" title="标记为绿色">
+                    <span class="flag-dot"></span><span>绿</span>
+                  </button>
+                  <button class="srs-action-button flag-blue" id="srsFlagBlueBtn" type="button" aria-label="标记为蓝色" title="标记为蓝色">
+                    <span class="flag-dot"></span><span>蓝</span>
+                  </button>
+                </div>
+              </div>
+              <div class="qlabel" id="srsFrontLabel">正面</div>
+              <div class="qword" id="srsFrontText"></div>
+              <div class="qhint" id="srsFrontHint">在脑中回忆答案后点击查看</div>
+            </div>
+            <div class="anki-face anki-back">
+              <div class="qlabel" id="srsBackLabel">背面</div>
+              <div class="qword" id="srsBackText"></div>
+              <div class="qextra" id="srsBackExtra" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="anki-nav-row" hidden>
+          <button class="btn ghost anki-nav" id="srsPrevBtn" type="button" aria-label="上一张" title="上一张">← 上一张</button>
+          <div class="anki-nav-hint" id="srsNavHint"></div>
+          <button class="btn ghost anki-nav" id="srsNextBtn" type="button" aria-label="下一张" title="下一张">下一张 →</button>
+        </div>
+
+        <div class="anki-action-bar" id="srsPreFlip">
+          <button class="btn primary" id="srsFlipBtn" type="button">显示答案</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn ghost" id="srsUndoBtn" disabled hidden>撤销</button>
+          <button type="button" class="btn ghost" id="srsMoreBtn" hidden>更多</button>
+          <button type="button" class="btn ghost" id="srsHelpBtn" hidden>快捷键</button>
+          <button type="button" class="btn ghost" id="srsQuitBtn">结束复习</button>
+        </div>
+
+        <div class="anki-ratings" id="srsRatings" hidden>
+          <button class="anki-rate-btn again" data-srs-rate="again" type="button">
+            <span class="rate-label">再看</span>
+            <span class="rate-interval" id="srsAgainInterval"></span>
+          </button>
+          <button class="anki-rate-btn hard" data-srs-rate="hard" type="button">
+            <span class="rate-label">困难</span>
+            <span class="rate-interval" id="srsHardInterval"></span>
+          </button>
+          <button class="anki-rate-btn good" data-srs-rate="good" type="button">
+            <span class="rate-label">良好</span>
+            <span class="rate-interval" id="srsGoodInterval"></span>
+          </button>
+          <button class="anki-rate-btn easy" data-srs-rate="easy" type="button">
+            <span class="rate-label">简单</span>
+            <span class="rate-interval" id="srsEasyInterval"></span>
+          </button>
+        </div>
+
+        <div class="srs-more-panel" id="srsMorePanel" hidden>
+          <button class="btn ghost" id="srsInfoBtn" type="button">卡片信息</button>
+          <button class="btn ghost" id="srsEditBtn" type="button">编辑当前卡</button>
+          <button class="btn ghost" id="srsDueBtn" type="button">设置到期</button>
+          <button class="btn ghost" id="srsResetBtn" type="button">重置进度</button>
+          <button class="btn danger" id="srsDeleteBtn" type="button">删除调度</button>
+        </div>
+
+        <div class="srs-modal" id="srsPanelModal" hidden>
+          <div class="srs-modal-card">
+            <div class="section-title">
+              <h3 id="srsPanelTitle">卡片</h3>
+              <button class="icon-button" id="srsPanelCloseBtn" type="button" aria-label="关闭">×</button>
+            </div>
+            <div id="srsPanelBody"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SRS 复习完成结果 -->
+      <section id="srsResult" hidden>
+        <div class="prompt-card">
+          <div class="qlabel">今日复习完成</div>
+          <div class="qword" id="srsScoreBig"></div>
+          <div class="qhint" id="srsScoreText"></div>
+          <div class="anki-rating-summary" id="srsRatingSummary"></div>
+        </div>
+        <div class="row" style="justify-content:center">
+          <button class="btn primary" id="srsContinueBtn" type="button">继续复习</button>
+          <button class="btn ghost" id="srsToPlazaBtn" type="button">返回牌组</button>
+        </div>
+      </section>
+
+      <section id="wordCollection" hidden>
+        <div class="crumb"><button class="link-button" id="backToUnitsFromCollectionBtn" type="button">大学英语 IV</button> / <span id="collectionCrumb">收藏单词</span></div>
+
+        <div class="page-head compact-head">
+          <div>
+            <h1 id="collectionTitle">收藏单词</h1>
+            <p class="sub" id="collectionIntro"></p>
+          </div>
+          <button class="btn primary" id="practiceCollectionBtn" type="button">专项巩固</button>
+        </div>
+
+        <div class="word-list" id="collectionList"></div>
+      </section>
+
+      <section id="trainer" class="trainer" hidden>
+        <div class="row between" style="margin-bottom:16px">
+          <span class="chip tone" id="unitName" style="--tone:#b5502f;--tone-soft:#f3e3dc"></span>
+          <span class="hint-text" id="counter"></span>
+        </div>
+        <div class="pbar" style="--tone:#b5502f;margin-bottom:24px"><i id="pbar" style="width:0%"></i></div>
+
+        <div id="feedback"></div>
+
+        <div class="prompt-card">
+          <div class="prompt-actions">
+            <button class="icon-button" id="favoriteToggleBtn" type="button" aria-label="收藏当前单词" title="收藏当前单词">☆</button>
+          </div>
+          <div class="qlabel">中文释义</div>
+          <div class="qword" id="promptText"></div>
+          <div class="qhint" id="promptMeta"></div>
+          <div class="reveal" id="reveal" hidden>
+            <div class="ans" id="answerText"></div>
+            <div class="extra" id="answerExtra"></div>
+          </div>
+        </div>
+
+        <form id="answerForm">
+          <input
+            class="input big"
+            id="answerInput"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="输入英文单词，回车提交"
+          />
+          <div class="row" style="margin-top:16px">
+            <button type="submit" class="btn primary" id="submitBtn">提交</button>
+            <button type="button" class="btn ghost" id="revealBtn">不会，看答案</button>
+            <button type="button" class="btn ghost" id="skipBtn">跳过</button>
+            <div class="spacer"></div>
+            <button type="button" class="btn ghost" id="quitBtn">结束</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="result" hidden>
+        <div class="prompt-card">
+          <div class="qlabel">本轮完成</div>
+          <div class="qword" id="scoreBig"></div>
+          <div class="qhint" id="scoreText"></div>
+        </div>
+        <div class="row" style="justify-content:center">
+          <button class="btn primary" id="againBtn" type="button">再练一轮</button>
+          <button class="btn ghost" id="wrongOnlyBtn" hidden type="button">只练错词</button>
+          <button class="btn ghost" id="changeUnitBtn" type="button">换 Unit</button>
+          <button class="btn ghost" id="changeLanguageBtn" type="button">换语言</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="data/college-english-iv.js"></script>
+    <script src="data/russian-wordbook.js"></script>
+    <script src="data/lunyu-translations.js"></script>
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

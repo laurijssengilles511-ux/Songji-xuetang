@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>诵记学堂 · 背诵记忆学习平台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" id="topbar"></header>
+
+    <main class="wrap">
+      <div class="page-head">
+        <h1>诵记学堂</h1>
+        <p class="sub">把需要「背」的学科集中到一处 —— 外语学习、经典诵记，一站式记忆训练。</p>
+      </div>
+
+      <section class="stats" aria-label="学习统计">
+        <div class="stat srs-stat-entry">
+          <button class="srs-stat-btn" id="homeSrsBtn" type="button">
+            <div class="n">—</div><div class="l">今日待复习</div>
+          </button>
+        </div>
+        <div class="stat stat-reviewed">
+          <div class="n">—</div>
+          <div class="l">已复习</div>
+        </div>
+        <div class="stat stat-streak">
+          <div class="n">—</div>
+          <div class="l">连续天数</div>
+        </div>
+        <div class="stat stat-retention">
+          <div class="n">—</div>
+          <div class="l">掌握率</div>
+        </div>
+      </section>
+
+      <section class="grid grid-3" aria-label="学习模块">
+        <a class="card mod-card" href="dictation.html" style="--tone:#b5502f;--tone-soft:#f3e3dc">
+          <div class="icon">库</div>
+          <h3>选择牌组</h3>
+          <p>集中浏览官方外语、论语和用户公开牌组；按标签筛选，也可以收藏常用记忆牌组。</p>
+          <div class="pbar"><i style="width:0%"></i></div>
+          <div class="foot">
+            <span class="chip tone">官方 · 标签 · 收藏</span>
+            <span class="go">进入 →</span>
+          </div>
+        </a>
+
+        <a class="card mod-card" href="create.html" style="--tone:#3d6b5e;--tone-soft:#e0ebe6">
+          <div class="icon">创</div>
+          <h3>创建牌组</h3>
+          <p>创建本地资料空间后可制作个人背诵牌组；公开牌组会出现在牌组列表，私密牌组只对你可见。</p>
+          <div class="pbar"><i style="width:0%"></i></div>
+          <div class="foot">
+            <span class="chip tone">本地资料空间开放</span>
+            <span class="go">创建 →</span>
+          </div>
+        </a>
+      </section>
+
+      <p class="footer">诵记学堂 · 初始版本 · 数据只保存在当前浏览器中，换设备前请导出备份</p>
+    </main>
+
+    <script src="data/college-english-iv.js"></script>
+    <script src="data/russian-wordbook.js"></script>
+    <script src="data/lunyu-translations.js"></script>
+    <script src="vendor/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="srs.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
